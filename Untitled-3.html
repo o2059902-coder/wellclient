@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS2 WALLHACK PRO | PREMIUM CHEAT</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+            color: #00ffea;
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .login-form {
+            background: rgba(0, 255, 234, 0.1);
+            border: 2px solid #00ffea;
+            border-radius: 15px;
+            padding: 40px;
+            width: 400px;
+            backdrop-filter: blur(10px);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .login-title {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #00ffea, #0080ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #88ffff;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 255, 234, 0.1);
+            border: 1px solid #00ffea;
+            border-radius: 8px;
+            color: #00ffea;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #0080ff;
+            box-shadow: 0 0 10px rgba(0, 255, 234, 0.5);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #00ffea, #0080ff);
+            color: #000;
+            border: none;
+            padding: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .error-message {
+            color: #ff4444;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .key-hint {
+            color: #88ffff;
+            text-align: center;
+            font-size: 0.9em;
+            margin-top: 10px;
+            opacity: 0.7;
+        }
+
+        /* Стили для профиля */
+        .profile-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 255, 234, 0.1);
+            border: 1px solid #00ffea;
+            border-radius: 25px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .profile-btn:hover {
+            background: rgba(0, 255, 234, 0.2);
+            transform: scale(1.05);
+        }
+
+        .avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00ffea, #0080ff);
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .username {
+            color: #00ffea;
+            font-weight: bold;
+        }
+
+        .profile-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .profile-content {
+            background: rgba(0, 255, 234, 0.1);
+            border: 2px solid #00ffea;
+            border-radius: 15px;
+            padding: 30px;
+            width: 400px;
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00ffea, #0080ff);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .profile-info {
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 255, 234, 0.3);
+        }
+
+        .info-label {
+            color: #88ffff;
+        }
+
+        .info-value {
+            color: #00ffea;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #ff4444, #ff6b6b);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #00ffea;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: none;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea; }
+            to { text-shadow: 0 0 20px #0080ff, 0 0 30px #0080ff; }
+        }
+
+        .title {
+            font-size: 3.5em;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #00ffea, #0080ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #88ffff;
+            margin-bottom: 30px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(0, 255, 234, 0.05);
+            border: 1px solid #00ffea;
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 234, 0.3);
+            border-color: #0080ff;
+        }
+
+        .card h3 {
+            color: #00ffea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            border-bottom: 2px solid #00ffea;
+            padding-bottom: 10px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            background: rgba(0, 255, 234, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #00ffea;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(0, 255, 234, 0.2);
+            transform: scale(1.05);
+        }
+
+        .download-section {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #00ffea, #0080ff);
+            color: #000;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 234, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 255, 234, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 234, 0); }
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            animation: none;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            animation: countUp 2s ease-out;
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #00ffea;
+            display: block;
+        }
+
+        .warning {
+            background: linear-gradient(45deg, #ff0000, #ff6b6b);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #00ffea;
+            margin-top: 40px;
+        }
+
+        .cyber-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ffea, transparent);
+            margin: 20px 0;
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { background-position: -100% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .title {
+                font-size: 2.5em;
+            }
+            
+            .login-form {
+                width: 90%;
+                padding: 20px;
+            }
+            
+            .profile-content {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Система регистрации -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-form">
+            <h2 class="login-title">🔐 ДОСТУП К CS2 WALLHACK PRO</h2>
+            <div class="input-group">
+                <label for="username">Логин:</label>
+                <input type="text" id="username" placeholder="Введите логин">
+            </div>
+            <div class="input-group">
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" placeholder="Введите пароль">
+            </div>
+            <div class="input-group">
+                <label for="accessKey">Ключ доступа:</label>
+                <input type="text" id="accessKey" placeholder="Введите ключ доступа">
+            </div>
+            <p class="key-hint">Для получения ключа обратитесь к администратору</p>
+            <button class="login-btn" onclick="login()">🚀 ВОЙТИ В СИСТЕМУ</button>
+            <div class="error-message" id="errorMessage">❌ Неверные данные доступа!</div>
+        </div>
+    </div>
+
+    <!-- Профиль в правом верхнем углу -->
+    <div class="profile-container" id="profileContainer" style="display: none;">
+        <div class="profile-btn" onclick="toggleProfile()">
+            <div class="avatar" id="userAvatar">U</div>
+            <div class="username" id="userName">User</div>
+        </div>
+    </div>
+
+    <!-- Модальное окно профиля -->
+    <div class="profile-modal" id="profileModal">
+        <div class="profile-content">
+            <button class="close-btn" onclick="closeProfile()">×</button>
+            <div class="profile-header">
+                <div class="profile-avatar" id="profileAvatar">U</div>
+                <h3 id="profileUsername">User</h3>
+            </div>
+            <div class="profile-info">
+                <div class="info-item">
+                    <span class="info-label">Статус:</span>
+                    <span class="info-value" style="color: #00ff00;">PREMIUM</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Дата регистрации:</span>
+                    <span class="info-value" id="regDate">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Чит скачан:</span>
+                    <span class="info-value" id="downloadCount">0 раз</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Подписка до:</span>
+                    <span class="info-value" style="color: #00ff00;">БЕССРОЧНО</span>
+                </div>
+            </div>
+            <button class="logout-btn" onclick="logout()">🚪 Выйти из системы</button>
+        </div>
+    </div>
+
+    <!-- Основной контент (скрыт до авторизации) -->
+    <div class="matrix-bg" id="matrix"></div>
+    
+    <div class="container" id="mainContent">
+        <div class="header">
+            <h1 class="title">⚡ CS2 WALLHACK PRO ⚡</h1>
+            <p class="subtitle">ULTIMATE GAMING EXPERIENCE • UNDETECTED • PREMIUM</p>
+        </div>
+
+        <div class="cyber-line"></div>
+
+        <div class="warning">
+            ⚠ ВНИМАНИЕ: Использование чита может привести к блокировке аккаунта. Используйте на свой риск!
+        </div>
+
+        <div class="main-content">
+            <div class="card">
+                <h3>🔥 ПРЕИМУЩЕСТВА</h3>
+                <div class="features-grid">
+                    <div class="feature-item">📡 Wallhack через стены</div>
+                    <div class="feature-item">🎯 Авто-прицеливание</div>
+                    <div class="feature-item">📊 Радар хак</div>
+                    <div class="feature-item">🚀 ESP информация</div>
+                    <div class="feature-item">🛡️ Анти-обнаружение</div>
+                    <div class="feature-item">⚡ Максимальный FPS</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📈 СТАТИСТИКА</h3>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="users">15K+</span>
+                        <span>пользователей</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="uptime">99.8%</span>
+                        <span>аптайм</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="updates">24/7</span>
+                        <span>обновления</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <button class="btn" onclick="downloadCheat()">
+                🚀 СКАЧАТЬ PRO WALLHACK
+            </button>
+            <button class="btn" onclick="showInstructions()">
+                📖 ИНСТРУКЦИЯ
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>🎯 КАК РАБОТАЕТ</h3>
+            <p>Наш чит использует передовые технологии для чтения игровой памяти без обнаружения. Внешний запуск обеспечивает максимальную безопасность.</p>
+            <div class="cyber-line"></div>
+            <p><strong>Требования:</strong> Windows 10/11, Python 3.8+, CS2</p>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 CS2 WALLHACK PRO | Premium Gaming Software</p>
+            <p style="font-size: 0.8em; color: #88ffff;">Только для образовательных целей</p>
+        </div>
+    </div>
+
+    <script>
+        let downloadCount = 0;
+
+        // Система авторизации
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const accessKey = document.getElementById('accessKey').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Проверка ключа доступа
+            if (accessKey !== 'MATVEYSIGMA333') {
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Проверка логина и пароля (минимальная длина)
+            if (username.length < 3 || password.length < 3) {
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Успешная авторизация
+            errorMessage.style.display = 'none';
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            document.getElementById('profileContainer').style.display = 'block';
+            
+            // Обновляем данные пользователя
+            updateUserProfile(username);
+            
+            // Сохраняем данные в localStorage
+            localStorage.setItem('cs2hack_authenticated', 'true');
+            localStorage.setItem('cs2hack_username', username);
+            localStorage.setItem('cs2hack_downloadCount', '0');
+            localStorage.setItem('cs2hack_regDate', new Date().toLocaleDateString());
+        }
+
+        // Обновление профиля пользователя
+        function updateUserProfile(username) {
+            const firstLetter = username.charAt(0).toUpperCase();
+            
+            // Обновляем аватарку и имя
+            document.getElementById('userAvatar').textContent = firstLetter;
+            document.getElementById('userName').textContent = username;
+            document.getElementById('profileAvatar').textContent = firstLetter;
+            document.getElementById('profileUsername').textContent = username;
+            
+            // Обновляем дату регистрации
+            const regDate = localStorage.getItem('cs2hack_regDate') || new Date().toLocaleDateString();
+            document.getElementById('regDate').textContent = regDate;
+            
+            // Обновляем счетчик скачиваний
+            const savedCount = localStorage.getItem('cs2hack_downloadCount') || '0';
+            downloadCount = parseInt(savedCount);
+            document.getElementById('downloadCount').textContent = downloadCount + ' раз';
+        }
+
+        // Открытие/закрытие профиля
+        function toggleProfile() {
+            document.getElementById('profileModal').style.display = 'flex';
+        }
+
+        function closeProfile() {
+            document.getElementById('profileModal').style.display = 'none';
+        }
+
+        // Выход из системы
+        function logout() {
+            localStorage.removeItem('cs2hack_authenticated');
+            localStorage.removeItem('cs2hack_username');
+            document.getElementById('loginContainer').style.display = 'flex';
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('profileContainer').style.display = 'none';
+            document.getElementById('profileModal').style.display = 'none';
+            
+            // Очищаем поля формы
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('accessKey').value = '';
+        }
+
+        // Проверка авторизации при загрузке
+        window.addEventListener('load', function() {
+            if (localStorage.getItem('cs2hack_authenticated') === 'true') {
+                const username = localStorage.getItem('cs2hack_username');
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                document.getElementById('profileContainer').style.display = 'block';
+                updateUserProfile(username);
+            }
+        });
+
+        // Matrix background effect
+        function createMatrix() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const matrixBg = document.getElementById('matrix');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            matrixBg.appendChild(canvas);
+            
+            const chars = "01010101010101010101010101010101";
+            const charArray = chars.split("");
+            const fontSize = 14;
+            const columns = canvas.width / fontSize;
+            const drops = [];
+            
+            for(let i = 0; i < columns; i++) {
+                drops[i] = 1;
+            }
+            
+            function draw() {
+                ctx.fillStyle = "rgba(0, 10, 20, 0.04)";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = "#00ffea";
+                ctx.font = fontSize + "px Orbitron";
+                
+                for(let i = 0; i < drops.length; i++) {
+                    const text = charArray[Math.floor(Math.random() * charArray.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    
+                    if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(draw, 35);
+        }
+
+        createMatrix();
+
+        function downloadCheat() {
+            const code = `import pymem
+import pymem.process
+import time
+
+def wallhack():
+    try:
+        pm = pymem.Pymem("cs2.exe")
+        client = pymem.process.module_from_name(pm.process_handle, "client.dll").lpBaseOfDll
+        
+        print("🔥 CS2 Wallhack PRO активирован!")
+        print("📡 Сканирование игроков...")
+        
+        while True:
+            local_player = pm.read_uint(client + 0xDEA964)
+            if local_player:
+                local_team = pm.read_int(local_player + 0x3BF)
+                for i in range(1, 64):
+                    entity_addr = client + 0x4E0F41C + (i * 0x10)
+                    entity = pm.read_uint(entity_addr)
+                    if entity and entity != local_player:
+                        team = pm.read_int(entity + 0x3BF)
+                        health = pm.read_int(entity + 0x344)
+                        if health > 0 and team != local_team:
+                            pm.write_uint(entity + 0x3D91, 1)
+                            pm.write_uint(entity + 0x3D92, 1)
+            time.sleep(0.1)
+    except Exception as e:
+        print(f"❌ Ошибка: {e}")
+
+if __name__ == "__main__":
+    wallhack()`;
+
+            const blob = new Blob([code], { type: 'text/python' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'cs2_wallhack_pro.py';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            // Увеличиваем счетчик скачиваний
+            downloadCount++;
+            localStorage.setItem('cs2hack_downloadCount', downloadCount.toString());
+            document.getElementById('downloadCount').textContent = downloadCount + ' раз';
+            
+            alert('✅ Чит успешно скачан! Запустите файл во время игры CS2.');
+        }
+
+        function showInstructions() {
+            alert('📖 ИНСТРУКЦИЯ:\n\n1. Установите Python 3.8+\n2. Установите pymem: pip install pymem\n3. Запустите CS2\n4. Запустите скачанный файл\n5. Наслаждайтесь игрой!');
+        }
+
+        // Animate stats
+        function animateStats() {
+            const users = document.getElementById('users');
+            const uptime = document.getElementById('uptime');
+            const updates = document.getElementById('updates');
+            
+            let userCount = 0;
+            const userTimer = setInterval(() => {
+                userCount += 347;
+                users.textContent = userCount + '+';
+                if(userCount >= 15000) clearInterval(userTimer);
+            }, 50);
+        }
+
+        setTimeout(animateStats, 1000);
+    </script>
+</body>
+</html>
